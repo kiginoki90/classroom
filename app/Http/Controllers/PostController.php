@@ -26,7 +26,7 @@ class PostController extends Controller
     // 作成ページ
     public function create()
     {
-        return view ('posts.create');
+        return view('posts.create');
     }
 
     // 作成機能
@@ -36,13 +36,48 @@ class PostController extends Controller
         $post = new Post();
 
         //保存の内容
-        $post->title = $request->input('title');
         $post->content = $request->input('content');
         $post->user_id = Auth::id();
+        $post->user_name =Auth::user()->name;
 
         //データベースに保存
         $post->save();
 
-        return redirect()->route('posts.index')->with('flsh_message','投稿が完了しました');
+        return redirect()->route('posts.index')->with('flash_message', '投稿が完了しました');
+    }
+
+    // 編集ページ
+    public function edit(Post $post)
+    {
+        if ($post->user_id !== Auth::id()) {
+            return redirect()->route('posts.index')->with('error_message', '不正なアクセスです');
+        }
+
+        return view('posts.edit', compact('post'));
+    }
+
+    // 更新機能
+    public function update(PostRequest $request, Post $post)
+    {
+        if ($post->user_id !== Auth::id()) {
+            return redirect()->route('posts.index')->with('error_message', '不正なアクセスです。');
+        }
+
+        $post->content = $request->input('content');
+        $post->save();
+
+        return redirect()->route('posts.show', $post)->with('flash_message', '投稿を編集しました');
+    }
+
+    //削除機能
+    public function destroy(Post $post)
+    {
+        if ($post->user_id !== Auth::id()) {
+            return redirect()->route('posts.index')->with('error_message', '不正なアクセスです。');
+        }
+
+        $post->delete();
+
+        return redirect()->route('posts.index')->with('flash_message', '投稿を削除しました。');
     }
 }

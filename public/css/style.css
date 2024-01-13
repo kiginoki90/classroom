@@ -1,0 +1,56 @@
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.wrapper {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+}
+
+nav  {
+  height: 60px;
+}
+
+footer {
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+}
+
+.main-room {
+  width: 700px;
+}
+
+.flex-room{
+  display: flex;
+  justify-content: center;
+}
+
+.no-border-button {
+  border: none;
+  padding: 5px 5px; /* ボタン内の余白調整 */
+  background-color:rgba(52, 152, 219, 0);
+  color: #333; /* ボタンのテキスト色の設定 */
+  cursor: pointer; /* カーソルをポインターに変更（ホバー時に反応するようにするため） */
+  font-size: 20px;
+  font-weight: 580;
+}
+
+.icon-image {
+  width: 20px; /* アイコンの幅 */
+  height: 20px; /* アイコンの高さ */
+  margin-right: 5px; /* アイコンとテキストの間の余白 */
+}
+
+.text-flex{
+  display: flex;
+}
+
+.time-text{
+  font-size: 15px;
+  color: dimgray;
+  padding: 12px 0 0 10px;
+}
